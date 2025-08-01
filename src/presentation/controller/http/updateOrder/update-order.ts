@@ -10,7 +10,7 @@ export class UpdateOrderByIdController {
 
   @Put('/update/order/:id')
   @HttpCode(204)
-  async handle(@Param('id') id: string, @Body() body: UpdateOrderDto): Promise<void> {
-    await this.updateOrderByIdUseCase.update(id, body);
+  async handle(@Param('id') id: UpdateOrderDto): Promise<void> {
+    await this.updateOrderByIdUseCase.update(id);
   }
 }

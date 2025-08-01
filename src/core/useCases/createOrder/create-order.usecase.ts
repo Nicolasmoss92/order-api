@@ -9,11 +9,6 @@ export class CreateOrderUsecase implements ICreateOrderUseCase {
   constructor(@Inject('OrderRepository') private orderRepository: IOrderRepository) {}
 
   async create(body: Order): Promise<void> {
-    const existingOrder = await this.orderRepository.getOrderById(body.id);
-
-    if (existingOrder) {
-      throw new ExistsException();
-    }
 
     await this.orderRepository.create(body);
   }

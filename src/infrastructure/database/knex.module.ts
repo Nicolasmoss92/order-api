@@ -13,7 +13,7 @@ import { DatabaseService } from '../database/database.service';
           connection: {
             host: 'localhost',
             port: 5432,
-            user: 'pet_service',
+            user: 'postgres',
             password: '1234',
             database: 'pet_service',
           },
