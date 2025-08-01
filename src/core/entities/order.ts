@@ -1,12 +1,9 @@
 import { OrderStatus } from '../enums/order-status';
-import { OrderTotal } from '../valueObjects/orderTotal';
 import { Entity } from './entity';
-import { OrderItem } from './order-item';
 
 export class Order extends Entity<Order> {
   public readonly id: string;
   public userId: string;
-  public items: OrderItem[];
   public totalAmount: number;
   public status: OrderStatus;
   public createdAt: Date;
@@ -21,15 +18,10 @@ export class Order extends Entity<Order> {
       throw new Error('Order must have a userId.');
     }
 
-    if (!props.items || props.items.length === 0) {
-      throw new Error('Order must have at least one item.');
+    if (props.totalAmount == null || props.totalAmount < 0) {
+      throw new Error('Order must have a valid totalAmount.');
     }
 
-    this.items = props.items;
-    this.totalAmount = new OrderTotal(this.items).value;
-
-    if (!props.status) {
-      this.status = OrderStatus.CREATED;
-    }
+    this.status = props.status ?? OrderStatus.CREATED;
   }
 }

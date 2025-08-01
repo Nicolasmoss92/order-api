@@ -1,7 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsArray, IsNotEmpty, IsUUID, ValidateNested } from 'class-validator';
-import { Type } from 'class-transformer';
-import { CreateOrderItemDto } from 'src/helpers/dtos/oreder-item.dto';
+import { IsUUID, IsNotEmpty, IsNumber, Min } from 'class-validator';
 
 export class CreateOrderDto {
   @ApiProperty()
@@ -9,9 +7,8 @@ export class CreateOrderDto {
   @IsNotEmpty()
   userId: string;
 
-  @ApiProperty({ type: [CreateOrderItemDto] })
-  @IsArray()
-  @ValidateNested({ each: true })
-  @Type(() => CreateOrderItemDto)
-  items: CreateOrderItemDto[];
+  @ApiProperty()
+  @IsNumber({ maxDecimalPlaces: 2 })
+  @Min(0)
+  totalAmount: number;
 }
