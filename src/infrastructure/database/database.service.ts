@@ -1,20 +1,19 @@
 import { Injectable, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
 import knex, { Knex } from 'knex';
-import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class DatabaseService implements OnModuleInit, OnModuleDestroy {
   private knexInstance: Knex;
 
-  constructor(private readonly configService: ConfigService) {
+  constructor() {
     this.knexInstance = knex({
       client: 'pg',
       connection: {
-        host: this.configService.get<string>('DB_HOST'),
-        port: this.configService.get<number>('DB_PORT'),
-        user: this.configService.get<string>('DB_USER'),
-        password: this.configService.get<string>('DB_PASSWORD'),
-        database: this.configService.get<string>('DB_NAME'),
+        host: 'localhost',
+        port: 5432,
+        user: 'postgres',
+        password: '1234',
+        database: 'pet_service',
       },
       migrations: {
         tableName: 'migrations',

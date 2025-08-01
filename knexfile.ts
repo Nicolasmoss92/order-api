@@ -6,19 +6,16 @@ dotenv.config();
 const config: Knex.Config = {
   client: 'pg',
   connection: {
-    host: process.env.DATABASE_HOST,
-    port: Number(process.env.DATABASE_PORT),
-    user: process.env.DATABASE_USER,
-    password: process.env.DATABASE_PASSWORD,
-    database: process.env.DATABASE_NAME,
+    host: 'localhost', // ou 127.0.0.1
+    port: 5432,
+    user: 'postgres',
+    password: '1234',
+    database: 'pet_service',
   },
-  searchPath: ['pet_service'],
+  searchPath: ['public'], // ou outro se estiver usando schema diferente
   migrations: {
     tableName: 'knex_migrations',
     directory: './src/infrastructure/database/migrations',
-  },
-  seeds: {
-    directory: './src/infrastructure/database/seeds',
   },
 };
 
